@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "../include/vector.h"
 
-int main() {
+int main(void) {
 	Vector v;
 	vector_init(&v, sizeof(int));
 	int x = 123;
