@@ -1,8 +1,8 @@
-#ifndef _6e5dcom_vector
-#define _6e5dcom_vector
+#ifndef INCLUDEGUARD_VECTOR
+#define INCLUDEGUARD_VECTOR
 
-#include <stddef.h>
 #include <stdbool.h>
+#include <stddef.h>
 
 typedef struct {
 	size_t size;
