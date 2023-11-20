@@ -7,13 +7,21 @@
 int main(void) {
 	Vector v;
 	vector_init(&v, sizeof(int));
-	const int X1 = 123;
+	const int data[] = {1, 2, 3, 4, 5, 6};
 	printf("%zu %zu %zu\n", v.size, v.len, v.capacity);
-	vector_pushback(&v, (uint8_t *)&X1);
-	const int X2 = 456;
-	vector_pushback(&v, (uint8_t *)&X2);
-	int value = *(int *)vector_offset(&v, 1);
-	printf("%d\n", value);
-	printf("%zu %zu %zu\n", v.size, v.len, v.capacity);
+	for (size_t idx = 0; idx < 6; idx += 1) {
+		vector_pushback(&v, (uint8_t *)&data[idx]);
+	}
+	for (size_t idx = 0; idx < v.len; idx += 1) {
+		printf("%d ", *(int*)vector_offset(&v, idx));
+	}
+	printf("\n");
+	for (size_t idx = 0; idx < 6; idx += 1) {
+		vector_insert_value(&v, (uint8_t *)&data[idx], 3);
+	}
+	for (size_t idx = 0; idx < v.len; idx += 1) {
+		printf("%d ", *(int*)vector_offset(&v, idx));
+	}
+	printf("\n");
 	vector_deinit(&v);
 }
