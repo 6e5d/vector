@@ -19,6 +19,8 @@ int main(void) {
 	for (size_t idx = 0; idx < 6; idx += 1) {
 		vector_insert_value(&v, (uint8_t *)&data[idx], 3);
 	}
+	vector_insert_value(&v, (uint8_t *)&data[0], 12);
+	vector_insert_value(&v, (uint8_t *)&data[0], 13);
 	for (size_t idx = 0; idx < v.len; idx += 1) {
 		printf("%d ", *(int*)vector_offset(&v, idx));
 	}

@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -30,6 +31,9 @@ void vector_deinit(Vector *v) {
 }
 
 void vector_reserve(Vector *v, size_t upcoming) {
+	while (v->len + upcoming <= v->capacity) {
+		return;
+	}
 	if (v->capacity == 0) {
 		v->p = realloc(v->p, upcoming * v->size);
 		assert(NULL != v->p);
@@ -53,8 +57,6 @@ void vector_pushback(Vector *v, void *elem) {
 void *vector_insert(Vector *v, size_t pos) {
 	assert(pos <= v->len);
 	vector_reserve(v, 1);
-	v->len += 1;
-
 	// shift all elements after pos
 	void *offset;
 	for (offset = v->p + (v->len - 1) * v->size;
@@ -63,6 +65,7 @@ void *vector_insert(Vector *v, size_t pos) {
 	) {
 		memcpy(offset + v->size, offset, v->size);
 	}
+	v->len += 1;
 	return (v->p + pos * v->size);
 }
 
