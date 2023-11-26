@@ -1,5 +1,5 @@
-#ifndef INCLUDEGUARD_VECTOR
-#define INCLUDEGUARD_VECTOR
+#ifndef INCLUDEGUARD_VECTOR_VECTORH
+#define INCLUDEGUARD_VECTOR_VECTORH
 
 #include <stdbool.h>
 #include <stddef.h>
