@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdint.h>
 
 typedef struct {
 	size_t size;
@@ -20,7 +21,7 @@ void *vector_insert(Vector *v, size_t pos);
 void vector_insert_value(Vector *v, void *elem, size_t pos);
 bool vector_popback(Vector *v);
 static inline void *vector_offset(Vector *v, size_t index) {
-	return v->p + index  *v->size;
+	return (void *)((uint8_t*)v->p + index * v->size);
 }
 size_t vector_unwrap(Vector *v, void **p);
 

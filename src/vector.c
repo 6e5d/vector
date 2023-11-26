@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -49,7 +50,7 @@ void vector_reserve(Vector *v, size_t upcoming) {
 
 void vector_pushback(Vector *v, void *elem) {
 	vector_reserve(v, 1);
-	void *offset = v->p + v->len * v->size;
+	uint8_t *offset = (uint8_t*)v->p + v->len * v->size;
 	v->len += 1;
 	memcpy(offset, elem, v->size);
 }
@@ -58,15 +59,15 @@ void *vector_insert(Vector *v, size_t pos) {
 	assert(pos <= v->len);
 	vector_reserve(v, 1);
 	// shift all elements after pos
-	void *offset;
-	for (offset = v->p + (v->len - 1) * v->size;
-		offset >= v->p + pos * v->size;
+	uint8_t *p0 = v->p;
+	for (uint8_t *offset = p0 + (v->len - 1) * v->size;
+		offset >= p0 + pos * v->size;
 		offset -= v->size
 	) {
 		memcpy(offset + v->size, offset, v->size);
 	}
 	v->len += 1;
-	return (v->p + pos * v->size);
+	return (p0 + pos * v->size);
 }
 
 void vector_insert_value(Vector *v, void *elem, size_t pos) {
