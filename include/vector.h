@@ -1,9 +1,5 @@
-#ifndef INCLUDEGUARD_VECTOR_VECTORH
-#define INCLUDEGUARD_VECTOR_VECTORH
-
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdint.h>
+#ifndef INCLUDEGUARD_VECTOR
+#define INCLUDEGUARD_VECTOR
 
 typedef struct {
 	size_t size;

@@ -1,11 +1,3 @@
-#include <assert.h>
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #include "../include/vector.h"
 
 // v must be allocated vector pointer
