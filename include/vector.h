@@ -6,19 +6,17 @@ typedef struct {
 	size_t capacity;
 	size_t len;
 	void *p;
-} Vector;
+} Vector();
 
-void vector_init(Vector *v, size_t size);
-void vector_resize(Vector *v, size_t new_len);
-void vector_reserve(Vector *v, size_t upcoming);
-void vector_deinit(Vector *v);
-void vector_pushback(Vector *v, void *elem);
-void *vector_insert(Vector *v, size_t pos);
-void vector_insert_value(Vector *v, void *elem, size_t pos);
-bool vector_popback(Vector *v);
-static inline void *vector_offset(Vector *v, size_t index) {
-	return (void *)((uint8_t*)v->p + index * v->size);
-}
-size_t vector_unwrap(Vector *v, void **p);
+void vector(init)(Vector() *v, size_t size);
+void vector(resize)(Vector() *v, size_t new_len);
+void vector(reserve)(Vector() *v, size_t upcoming);
+void vector(deinit)(Vector() *v);
+void vector(pushback)(Vector() *v, void *elem);
+void *vector(insert)(Vector() *v, size_t pos);
+void vector(insert_value)(Vector() *v, void *elem, size_t pos);
+bool vector(popback)(Vector() *v);
+void *vector(offset)(Vector() *v, size_t index);
+size_t vector(unwrap)(Vector() *v, void **p);
 
 #endif

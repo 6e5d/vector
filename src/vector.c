@@ -1,14 +1,14 @@
 #include "../include/vector.h"
 
 // v must be allocated vector pointer
-void vector_init(Vector *v, size_t size) {
+void vector(init)(Vector() *v, size_t size) {
 	v->size = size;
 	v->capacity = 0;
 	v->len = 0;
 	v->p = NULL;
 }
 
-void vector_resize(Vector *v, size_t new_len) {
+void vector(resize)(Vector() *v, size_t new_len) {
 	if (new_len <= v->capacity) {
 		v->len = new_len;
 		return;
@@ -19,11 +19,11 @@ void vector_resize(Vector *v, size_t new_len) {
 	assert(NULL != v->p);
 }
 
-void vector_deinit(Vector *v) {
+void vector(deinit)(Vector() *v) {
 	free(v->p);
 }
 
-void vector_reserve(Vector *v, size_t upcoming) {
+void vector(reserve)(Vector() *v, size_t upcoming) {
 	while (v->len + upcoming <= v->capacity) {
 		return;
 	}
@@ -40,16 +40,16 @@ void vector_reserve(Vector *v, size_t upcoming) {
 	assert(NULL != v->p);
 }
 
-void vector_pushback(Vector *v, void *elem) {
-	vector_reserve(v, 1);
+void vector(pushback)(Vector() *v, void *elem) {
+	vector(reserve)(v, 1);
 	uint8_t *offset = (uint8_t*)v->p + v->len * v->size;
 	v->len += 1;
 	memcpy(offset, elem, v->size);
 }
 
-void *vector_insert(Vector *v, size_t pos) {
+void *vector(insert)(Vector() *v, size_t pos) {
 	assert(pos <= v->len);
-	vector_reserve(v, 1);
+	vector(reserve)(v, 1);
 	// shift all elements after pos
 	uint8_t *p0 = v->p;
 	for (uint8_t *offset = p0 + (v->len - 1) * v->size;
@@ -62,20 +62,23 @@ void *vector_insert(Vector *v, size_t pos) {
 	return (p0 + pos * v->size);
 }
 
-void vector_insert_value(Vector *v, void *elem, size_t pos) {
-	void *p = vector_insert(v, pos);
+void vector(insert_value)(Vector() *v, void *elem, size_t pos) {
+	void *p = vector(insert)(v, pos);
 	memcpy(p, elem, v->size);
 }
 
-bool vector_popback(Vector *v) {
+bool vector(popback)(Vector() *v) {
 	if (v->len == 0) {
 		return false;
 	}
 	v->len -= 1;
 	return true;
 }
+void *vector(offset)(Vector() *v, size_t index) {
+	return (void *)((uint8_t*)v->p + index * v->size);
+}
 
-size_t vector_unwrap(Vector *v, void **p) {
+size_t vector(unwrap)(Vector() *v, void **p) {
 	*p = v->p;
 	return v->len;
 }
