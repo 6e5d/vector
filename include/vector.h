@@ -1,6 +1,3 @@
-#ifndef INCLUDEGUARD_VECTOR
-#define INCLUDEGUARD_VECTOR
-
 typedef struct {
 	size_t size;
 	size_t capacity;
@@ -18,5 +15,3 @@ void vector(insert_value)(Vector() *v, void *elem, size_t pos);
 bool vector(popback)(Vector() *v);
 void *vector(offset)(Vector() *v, size_t index);
 size_t vector(unwrap)(Vector() *v, void **p);
-
-#endif
